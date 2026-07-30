@@ -1,0 +1,11 @@
+# Ignore generated reports but keep the directory
+reports/*.json
+reports/*.csv
+
+# Ignore demo targets
+demo_targets/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
