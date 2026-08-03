@@ -46,7 +46,7 @@ def fetch_tree(repo, branch, headers):
         sys.exit(1)
     return resp.json().get("tree", [])
 
-def scan_content(content, path):
+def scan_content(content, path, hybrid=False):
     """Scan file content line by line using predefined regex rules.
     
     Why: Evaluating raw source code via static analysis allows us to catch cryptographic implementations before they are compiled or deployed. We use line-by-line regex scanning because it is language-agnostic and fast enough to run against massive codebases in real-time. This provides immediate, actionable feedback pinpointing the exact line where a vulnerable primitive is instantiated.
@@ -56,11 +56,39 @@ def scan_content(content, path):
     for i, line in enumerate(lines, 1):
         for rule in RULES:
             if rule["pattern"].search(line):
+                rec = rule.get("hybrid_recommendation", rule["recommendation"]) if hybrid else rule["recommendation"]
                 matches.append({
                     "file": path,
                     "line": str(i),
                     "primitive": rule["name"],
                     "risk": rule["risk"],
-                    "recommendation": rule["recommendation"]
+                    "recommendation": rec
                 })
+    return matches
+
+def scan_dependencies(content, path):
+    """Scan dependency files for legacy cryptographic libraries."""
+    matches = []
+    lines = content.splitlines()
+    for i, line in enumerate(lines, 1):
+        line_clean = line.strip().lower()
+        if not line_clean or line_clean.startswith("#"):
+            continue
+            
+        if "pycrypto" in line_clean and "pycryptodome" not in line_clean:
+            matches.append({
+                "file": path,
+                "line": str(i),
+                "primitive": "PyCrypto (Abandoned)",
+                "risk": "Supply Chain Risk / High",
+                "recommendation": "Upgrade to cryptography or pycryptodome with PQC wrappers"
+            })
+        elif "cryptography==" in line_clean or "cryptography<" in line_clean:
+            matches.append({
+                "file": path,
+                "line": str(i),
+                "primitive": "cryptography (Version pinned)",
+                "risk": "Supply Chain Risk / Medium",
+                "recommendation": "Ensure cryptography version >= 40.0 for PQC readiness"
+            })
     return matches

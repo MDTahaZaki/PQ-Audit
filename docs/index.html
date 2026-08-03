@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PQ-Audit | Post-Quantum Migration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            black: '#0a0a0a',
+                            gray: '#171717',
+                            lightgray: '#262626',
+                            green: '#39ff14',
+                            blue: '#00f3ff'
+                        }
+                    },
+                    fontFamily: {
+                        mono: ['"Fira Code"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@400;600;800&display=swap');
+        
+        body {
+            background-color: #0a0a0a;
+            color: #e5e5e5;
+            background-image: radial-gradient(circle at 50% 0%, #1a1a2e 0%, #0a0a0a 70%);
+        }
+
+        .terminal-window {
+            box-shadow: 0 0 40px rgba(0, 243, 255, 0.1);
+            border: 1px solid #262626;
+        }
+
+        .terminal-header {
+            background: linear-gradient(to right, #171717, #262626);
+            border-bottom: 1px solid #333;
+        }
+
+        .typing-animation {
+            overflow: hidden;
+            border-right: .15em solid #39ff14;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #39ff14; }
+        }
+
+        .glow-text {
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+            border: 1px solid #262626;
+        }
+        
+        .feature-card:hover {
+            border-color: #00f3ff;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.15);
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <nav class="border-b border-cyber-lightgray bg-cyber-black/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">🛡️</span>
+                    <span class="font-bold text-xl tracking-wider text-white">PQ-<span class="text-cyber-blue">Audit</span></span>
+                </div>
+                <div>
+                    <a href="https://github.com/owner/PQ-Audit" target="_blank" class="text-gray-300 hover:text-cyber-blue transition-colors duration-200 flex items-center gap-2 font-mono text-sm">
+                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/></svg>
+                        GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="flex-grow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center">
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 glow-text text-white">
+                Automating <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-blue to-purple-500">Post-Quantum</span> Migration.
+            </h1>
+            <p class="mt-4 max-w-2xl text-xl text-gray-400 mx-auto font-light">
+                Enterprise-grade zero-trust static analysis to secure your codebase against the "Harvest Now, Decrypt Later" threat.
+            </p>
+            
+            <div class="mt-10 flex justify-center gap-4">
+                <a href="https://github.com/owner/PQ-Audit" class="bg-cyber-blue text-cyber-black px-8 py-3 rounded-md font-bold text-lg hover:bg-cyan-300 transition-colors shadow-[0_0_15px_rgba(0,243,255,0.4)] flex items-center gap-2">
+                    View on GitHub
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+                <a href="#features" class="bg-cyber-lightgray text-white border border-gray-600 px-8 py-3 rounded-md font-semibold text-lg hover:bg-gray-700 transition-colors">
+                    Explore Features
+                </a>
+            </div>
+
+            <!-- Simulated Terminal -->
+            <div class="mt-16 max-w-3xl mx-auto terminal-window rounded-xl overflow-hidden bg-cyber-black text-left">
+                <div class="terminal-header px-4 py-2 flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    <span class="ml-2 text-xs text-gray-400 font-mono">pq-audit-cli ~ bash</span>
+                </div>
+                <div class="p-6 font-mono text-sm md:text-base h-64 overflow-y-auto">
+                    <div class="text-cyber-blue mb-2">$ pip install pq-audit</div>
+                    <div class="text-gray-400 mb-4">Successfully installed pq-audit-1.0.0</div>
+                    
+                    <div class="text-cyber-blue mb-2">$ python main.py owner/repo --format sarif</div>
+                    <div class="text-gray-300 mb-1">[+] Initializing Zero-Trust AST Parser...</div>
+                    <div class="text-gray-300 mb-1">[+] Scanning repository: owner/repo</div>
+                    <div class="text-yellow-400 mb-1">[!] Found legacy RSA-2048 in auth/jwt.py:42</div>
+                    <div class="text-yellow-400 mb-1">[!] Found ECC secp256r1 in core/crypto.py:105</div>
+                    <div class="text-cyber-green mb-1">[✓] Mapping to NIST FIPS 203/204 (ML-KEM / ML-DSA)</div>
+                    <div class="text-gray-300 mb-4">[+] Generating SARIF report: scan_results.sarif</div>
+                    
+                    <div class="flex">
+                        <span class="text-cyber-green mr-2">➜</span>
+                        <span class="typing-animation text-gray-100">Quantum migration schedule optimized.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div id="features" class="bg-cyber-gray py-24 border-y border-cyber-lightgray">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-white tracking-wide">Enterprise-Grade Analysis Pipeline</h2>
+                    <div class="w-24 h-1 bg-cyber-blue mx-auto mt-4 rounded-full"></div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="feature-card bg-cyber-black p-8 rounded-xl">
+                        <div class="w-14 h-14 bg-cyber-lightgray rounded-lg flex items-center justify-center mb-6 border border-gray-700">
+                            <svg class="w-8 h-8 text-cyber-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Zero-Trust Detection</h3>
+                        <p class="text-gray-400 font-light leading-relaxed">
+                            Advanced Abstract Syntax Tree (AST) parsing combined with heuristic regex to uncover hidden cryptographic primitives without relying on standard library assumptions.
+                        </p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="feature-card bg-cyber-black p-8 rounded-xl">
+                        <div class="w-14 h-14 bg-cyber-lightgray rounded-lg flex items-center justify-center mb-6 border border-gray-700">
+                            <svg class="w-8 h-8 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">NIST PQC Compliance</h3>
+                        <p class="text-gray-400 font-light leading-relaxed">
+                            Automatically maps deprecated algorithms to standard FIPS 203/204/205 equivalents (ML-KEM, ML-DSA). Outputs results in native SARIF v2.1.0 for CI/CD integration.
+                        </p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="feature-card bg-cyber-black p-8 rounded-xl">
+                        <div class="w-14 h-14 bg-cyber-lightgray rounded-lg flex items-center justify-center mb-6 border border-gray-700">
+                            <svg class="w-8 h-8 text-cyber-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Quantum Optimization</h3>
+                        <p class="text-gray-400 font-light leading-relaxed">
+                            Utilizes quantum-inspired scheduling algorithms to prioritize migration paths. Recommends Hybrid Composite architectures to maintain current compliance while future-proofing.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-cyber-black py-8 border-t border-cyber-lightgray text-center text-gray-500 font-mono text-sm">
+        <p>Built for the Quantum Era. &copy; 2026 PQ-Audit Open Source Project.</p>
+    </footer>
+
+</body>
+</html>
